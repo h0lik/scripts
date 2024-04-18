@@ -5,7 +5,7 @@
 # Github:github.com/h0lik
 # Date:17.04.2024
 #==================================================
-dir=/mnt/hdd/vmhub/
+dir= #Тут впишите свой путь куда будут сохраняться виртуальные диски!
 
 echo -e "Hello \e[32m $USER \e[0m ,Creating a virtual machine disk?"
 read -p "-Format virtual disk:" Hard
