@@ -32,4 +32,25 @@ echo 'alias vminstall="/home/$USER/.bin/./qemuinstall.sh"' >> ~/.bashrc && sourc
 Пример 
 iso=/home/user/iso/
 
+### Download iso scripts
+Скрипт для скачивания iso образов дистрибутивов 
+В скрипте собраны минимальные дистрибутивы для сетевых установок
+#### Список дистрибутиво!
+* Rockly Linux 8/9
+* Alpine Linux Virtual system 
+* Alma Linux 8/9
+* Fedora Server 39
+* Debian 11/12
+* Ubuntu Server 23/22lts/20
+#### Install Scripts
+````bash
+cd ~/.bin # Если у вас отсуствует каталог .bin то создайте его mkdir ~/.bin 
+mkdir isohub
+wget 
+chmod +x isohub.sh 
+echo 'alias isohub="/home/$USER/.bin/isohub/./isohub.sh"' >> ~/.bashrc && source ~/.bashrc
+cat ~/.bashrc | grep isohub 
+````
 ***
+
+ 
