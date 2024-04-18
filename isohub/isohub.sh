@@ -97,9 +97,9 @@ $(ColorGreen '5)') AlmaLinux-9
 $(ColorGreen '6)') FedoraServer-39 
 $(ColorGreen '7)') Debian-12
 $(ColorGreen '8)') Debian-11
-$(ColorGreen '9)') UbunutServer-23.10
-$(ColorGreen '10)') UbunutServer-22.04.LTS
-$(ColorGreen '11)') UbunutServer-20.04
+$(ColorGreen '9)') UbuntuServer-23.10
+$(ColorGreen '10)') UbuntuServer-22.04.LTS
+$(ColorGreen '11)') UbuntuServer-20.04
 $(ColorRed '0)') Exit 
 $(ColorBlue 'Choose an option:') "
 read isohub

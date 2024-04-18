@@ -46,7 +46,7 @@ iso=/home/user/iso/
 ````bash
 cd ~/.bin # Если у вас отсуствует каталог .bin то создайте его mkdir ~/.bin 
 mkdir isohub
-wget 
+wget  https://raw.githubusercontent.com/h0lik/scripts/main/isohub/isohub.sh
 chmod +x isohub.sh 
 echo 'alias isohub="/home/$USER/.bin/isohub/./isohub.sh"' >> ~/.bashrc && source ~/.bashrc
 cat ~/.bashrc | grep isohub 
