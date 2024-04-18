@@ -22,7 +22,7 @@ wget https://raw.githubusercontent.com/h0lik/scripts/main/qemu/qemuinstall.sh
 chmod +x qemuinstall.sh
 echo 'alias vminstall="/home/$USER/.bin/./qemuinstall.sh"' >> ~/.bashrc && source ~/.bashrc
 ````
-***
+
 По переменным в скрипте 
 Изменить переменную $dir на ваш каталог, если вы использовали скрипт для создания виртуального диска то укажите тот путь до каталога который вы указали в скрипте qemucreate.sh
 
@@ -31,4 +31,5 @@ echo 'alias vminstall="/home/$USER/.bin/./qemuinstall.sh"' >> ~/.bashrc && sourc
 
 Пример 
 iso=/home/user/iso/
+
 ***
