@@ -2,7 +2,7 @@
 
 ## Qemu
 
-### [x] qemu-img create
+###  qemu-img create
  ```bash 
  mkdir ~/.bin
  cd ~/.bin
