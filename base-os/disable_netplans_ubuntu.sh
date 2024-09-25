@@ -15,6 +15,8 @@ setting_network()  {
 echo -e "configure network dhcp"
 read -p "- name interfaces:" iner_name
 cat << EOF >> /etc/network/interfaces
+auto lo
+iface lo inet loopback
 auto $iner_name
 iface $iner_name inet dhcp
 EOF
@@ -42,10 +44,10 @@ echo -n "Продолжить? (y/n) "
 read item
 case "$item" in
     y|Y) echo "начинаем установку!"
-      $update_system
-      $gurb_configure
-      $setting_network
-      $netplans_del 
+      update_system
+      grub_configure
+      setting_network
+      netplans_del 
       ;;
     n|N) echo "Жаль,и пока!"
         exit 0
