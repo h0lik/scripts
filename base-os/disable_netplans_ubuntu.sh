@@ -1,14 +1,14 @@
 #!/bin/bash
 update_system() {
 echo -e "- Update system"
-sudo apt update && sudo apt upgrade -y 
+apt update && sudo apt upgrade -y 
 echo -e "Install soft"
-sudo apt install -y ifupdown net-tools resolvconf
+apt install -y ifupdown net-tools resolvconf
 }
 grub_configure() {
-sudo cp /etc/defaults/grub /etc/defaults/grub.bak
-sudo sed 's/GRUB_CMDLINE_LINUX=""/GRUB_CMDLINE_LINUX="netcfg/do_not_use_netplan=true"/g' /etc/defaults/grub
-sudo update-grub
+cp /etc/default/grub /etc/default/grub.bak
+sed 's/GRUB_CMDLINE_LINUX=""/GRUB_CMDLINE_LINUX="netcfg\/do_not_use_netplan=true"/g' /etc/default/grub
+update-grub
 }
 
 setting_network()  {
@@ -22,13 +22,13 @@ iface $iner_name inet dhcp
 EOF
 }
 netplans_del() {
-echo -e "\e[31m stopping service \e[0m"
+echo -e "\e[32m stopping service \e[0m"
 systemctl stop systemd-networkd.socket systemd-networkd networkd-dispatcher systemd-networkd-wait-online systemd-resolved
-echo "\e[31m disable service \e[0m"
+echo "\e[32m disable service \e[0m"
 systemctl disable systemd-networkd.socket systemd-networkd networkd-dispatcher systemd-networkd-wait-online systemd-resolved
-echo "\e[31m mask service \e[0m"
+echo "\e[32m mask service \e[0m"
 systemctl mask systemd-networkd.socket systemd-networkd networkd-dispatcher systemd-networkd-wait-online systemd-resolved
-echo "\e[31m purge netplans \e[0m"
+echo "\e[32m purge netplans \e[0m"
 apt-get --assume-yes purge nplan netplan.io
 }
 
