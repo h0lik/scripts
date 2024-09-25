@@ -22,13 +22,13 @@ iface $iner_name inet dhcp
 EOF
 }
 netplans_del() {
-echo -e "\e[32m stopping service \e[0m"
+echo -e "stopping service"
 systemctl stop systemd-networkd.socket systemd-networkd networkd-dispatcher systemd-networkd-wait-online systemd-resolved
-echo "\e[32m disable service \e[0m"
+echo "disable service"
 systemctl disable systemd-networkd.socket systemd-networkd networkd-dispatcher systemd-networkd-wait-online systemd-resolved
-echo "\e[32m mask service \e[0m"
+echo "mask service"
 systemctl mask systemd-networkd.socket systemd-networkd networkd-dispatcher systemd-networkd-wait-online systemd-resolved
-echo "\e[32m purge netplans \e[0m"
+echo "purge netplans"
 apt-get --assume-yes purge nplan netplan.io
 }
 
