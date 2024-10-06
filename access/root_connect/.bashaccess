@@ -1,9 +1,0 @@
-#!/bin/bash
-if [ -z "$ROOT_LOGGED" ]; then
-    export ROOT_LOGGED=true
-TOKEN="" 
-CHAT_ID=""
-MESSAGE="Access ROOT user $HOSTNAME"
-URL="https://api.telegram.org/bot$TOKEN/sendMessage"
-curl -s -X POST $URL -d chat_id=$CHAT_ID -d text="$MESSAGE" > /dev/null 2>&1
-fi
