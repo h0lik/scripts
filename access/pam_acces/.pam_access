@@ -1,0 +1,29 @@
+#!/bin/bash
+if [ -z "$PAM_ACCESS" ]; then
+    export PAM_ACCESS=true
+TOKEN=""
+CHAT_ID=""
+IPUSER=$(echo $SSH_CLIENT | awk '{ print $1}')
+MESSAGE="SSH Logged $PAM_USER@$(whoami) IP:$IPUSER"
+URL="https://api.telegram.org/bot$TOKEN/sendMessage"
+curl -s -X POST $URL -d chat_id=$CHAT_ID -d text="$MESSAGE" > /dev/null 2>&1
+fi
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
