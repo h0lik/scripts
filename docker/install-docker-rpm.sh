@@ -1,7 +1,7 @@
 #!/bin/bash
 
 installdocker() {
-    dnf -y install docker
+    dnf install -y docker
 }
 enabledocker() {
     systemctl enable --now docker
