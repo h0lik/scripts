@@ -2,7 +2,7 @@
 
 installdocker() {
     dnf -y config-manager --add-repo https://download.docker.com/linux/rhel/docker-ce.repo
-    dnf install docker-ce docker-ce-cli containerd.io
+    dnf -y install docker-ce docker-ce-cli containerd.io
 }
 enabledocker() {
     systemctl enable --now docker
