@@ -37,7 +37,15 @@ if [[ $EUID -ne 0 ]]; then
 	ehco "This script must be run as root"
 	exit 1
 fi 
- 
+
+if [ "$os" = "Linux" ]; then
+echo "This is a Linux machine"
+if [[ -f /etc/redhat-release ]]; then
+    pkg_manager=yum
+  elif [[ -f /etc/debian_version ]]; then
+    pkg_manager=apt
+  fi
+
 if [ $pkg_manager = "yum" ]; then 
 	fynct_rpm
 elif [ $pkg_manager = "apt" ]; then 
