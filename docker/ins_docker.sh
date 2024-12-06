@@ -1,5 +1,5 @@
 #!/bin/bash 
-
+os=$(uname)
 # Fynction install docker deb-base
 fynct_deb() {
 # Add docker`s official GPG Key:
@@ -15,7 +15,7 @@ echo \
   sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 apt-get update
 # Istall the latest version docker
-apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin -y
 #Starting Docker
 systemctl enable --now docker
 }
