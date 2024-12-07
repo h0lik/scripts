@@ -12,11 +12,28 @@ else
 		exit 0
 fi
 }
-echo "domains"
 
-read -p "Domian:" DOMAINS
+reset 
+cat << EOF
+ ---------------------------------------------------------------------
+ #####    #####             ##  ##    ####     ####    ##  ##   ##  ##  
+ ##  ##   ##  ##            ### ##   ##  ##     ##     ### ##   ##  ##  
+ ##  ##   ##  ##            ######   ##         ##     ######    ####   
+ #####    #####    ######   ######   ## ###     ##     ######     ##    
+ ####     ##                ## ###   ##  ##     ##     ## ###    ####   
+ ## ##    ##                ##  ##   ##  ##     ##     ##  ##   ##  ##  
+ ##  ##   ##                ##  ##    ####     ####    ##  ##   ##  ##  
+ ---------------------------------------------------------------------
+ Create config nginx reverse-proxy
+ Domains: domains.com / Your domain name
+ Proxy-address: 0.0.0.0:00 / Where are we proxying to
+ ---------------------------------------------------------------------
+EOF
+sleep 2
+echo "Enter your domain name"
+read -p "Domians:" DOMAINS
 echo "Куда будет проксировать без http/https"
-read -p "Proxy_address:" PROXY
+read -p "Proxy-address:" PROXY
 touch $DIR/$DOMAINS.conf
 cat << EOF >> $DIR/$DOMAINS.conf
 server {
