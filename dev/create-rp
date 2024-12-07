@@ -1,5 +1,10 @@
 #!/bin/bash
-
+#================================
+#Name:Create revese-proxy nginx
+#Date:08.12.2024
+#Autor:h0lik
+#Version:0.0.1
+#===============================
 DIR=/etc/nginx/sites-available
 DIR2=/etc/nginx/sites-enabled
 check_nginx() {
