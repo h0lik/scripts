@@ -43,6 +43,8 @@ echo "test nginx configure"
 nginx -t
 echo -e "If nginx is \e[32m OK \e[0m , then you can restart it"
 echo -e "Restart Nginx?"
+echo "Press enter to continue [y/n]"
+read ENTER
 if [ $ENTER = "y" ] ;
     then
 	echo -e "\e[32m Restart Nginx \e[0m"
