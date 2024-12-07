@@ -2,7 +2,16 @@
 
 DIR=/etc/nginx/sites-available
 DIR2=/etc/nginx/sites-enabled
-
+check_nginx() {
+    if sudo pidof -x nginx > /dev/null
+  then
+	  echo -e "Nginx............. \e[32m ok!\e[0m"
+		exit 0
+else
+    echo -e "\e[32m Nginx............\e[31m error!\e[0m"
+		exit 0
+fi
+}
 echo "domains"
 
 read -p "Domian:" DOMAINS
@@ -32,3 +41,14 @@ ln -s $DIR/$DOMAINS.conf $DIR2/$DOMAINS.conf
 cat /etc/nginx/sites-available/$DOMAINS.conf
 echo "test nginx configure"
 nginx -t
+echo -e "If nginx is \e[32m OK \e[0m , then you can restart it"
+echo -e "Restart Nginx?"
+if [ $ENTER = "y" ] ;
+    then
+	echo -e "\e[32m Restart Nginx \e[0m"
+	systemctl restart nginx
+  check_nginx
+	else
+	echo "\e[31m Exit \e[0m"
+	exit;
+fi
