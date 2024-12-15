@@ -1,0 +1,39 @@
+#!/bin/bash
+KEYDIR=~/.ssh
+set -e
+reset
+cat << EOF
+ ##    ##   #  #         ##    ##   #  #  ####  ###    ##
+#  #  #  #  #  #        #  #  #  #  ## #  #      #    #  #
+ #     #    ####        #     #  #  ## #  ###    #    #
+  #     #   #  #  ####  #     #  #  # ##  #      #    # ##
+#  #  #  #  #  #        #  #  #  #  # ##  #      #    #  #
+ ##    ##   #  #         ##    ##   #  #  #     ###    ###
+==========================================================
+What will it look like:
+#===============kvm-srv01===============
+Host (name alias)
+    HostName (ip address - domain)
+    Port (port)
+    User (users)
+    IdentityFile (ssh private key)
+==========================================================
+EOF
+printf "Name SSH alias - SSH NAME \n"
+read -p "SSH name alias:" NAME
+printf "IP-address and domains remote servers! \n"
+read -p "IP-address and domian:" DOMAIN
+printf "SSH port remote servers, defaults 22 \n"
+read -p "Port ssh-server:" PORT
+printf "User remote ssh server.\n"
+read -p "Users:" USER_SSH
+printf "Private key:"
+read -p "Name key:" NAME_KEY
+cat << EOF >> /root/.ssh/config
+#=============${NAME}===============
+Host ${NAME}
+    HostName ${DOMAIN}
+    Port ${PORT}
+    User ${USER_SSH}
+    IdentityFile ${KEYDIR}/$NAME_KEY
+EOF
