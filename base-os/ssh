@@ -1,0 +1,11 @@
+#!/bin/bash
+R="\e[31m"
+G="\e[32m"
+O="\e[0m"
+USER=$(whoami)
+LIBDIR="/home/floki/script"
+read -p "Bash script:" NAMEFILES
+read -p "IP-Address host:" iphost
+echo -e "${G}ssh${O} ${G}USER:${O}${R}${USER}${O},${G}HOST:${O}${R}${iphost}${O} ${G}connect!${O}"
+sleep 2
+ssh ${USER}@${iphost} bash -s < ${NAMEFILES}
