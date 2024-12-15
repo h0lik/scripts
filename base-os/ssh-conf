@@ -11,7 +11,7 @@ cat << EOF
  ##    ##   #  #         ##    ##   #  #  #     ###    ###
 ==========================================================
 What will it look like:
-#===============kvm-srv01===============
+#===============Comment name alias===============
 Host (name alias)
     HostName (ip address - domain)
     Port (port)
