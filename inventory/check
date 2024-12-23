@@ -26,18 +26,20 @@ class Raspberry(object):
                 password=host_info.get('password')
             )
             commands = [
-                        'echo "<------------$(hostname)--------------->"',
+                        'echo "<------------$(hostname)--------------------------->"',
                         'echo "OS-type: $(uname -s) $(sudo cat /etc/os-release | grep PRETTY | cut -d "=" -f2) $(uname -m)"',
-                        'echo "<------------------CPUS--------------------->"',
+                        'echo "<------------------UPTIME-------------------------->"',
+                        'echo "$(uptime)"',
+                        'echo "<------------------CPUS---------------------------->"',
                         'echo "CPUS:$(nproc)"',
-                        'echo "<----------------Memory--------------------->"',
+                        'echo "<----------------Memory---------------------------->"',
                         'echo "Memory: $(($(($(cat /proc/meminfo | grep -i "memtotal" | grep -o "[[:digit:]]*") / 1024)) / 1024)) GB"',
-                        'echo "<----------------Disk----------------------->"'
+                        'echo "<----------------Disk------------------------------>"',
                         'echo "Disk:"',
                         'echo "$(df -h --output=source,fstype,size,used,avail,pcent,target -x tmpfs -x devtmpfs -x efivarfs)"',
-                        'echo "<----------------Network-------------------->"',
+                        'echo "<----------------Network--------------------------->"',
                         'echo "$(netstat -i | grep -e "enp" -e "vm")"',
-                        'echo "<----------------END------------------------>"'
+                        'echo "<----------------END------------------------------->"'
                         ]
             for  command in commands:
                  std_in, stdout, stderr = self.ssh_client.exec_command(command)
