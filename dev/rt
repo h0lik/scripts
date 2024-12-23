@@ -85,6 +85,11 @@ ssh -t ${NAMECHECK} "sudo route -n | grep ${ADDCHECK} && \
                      echo "<==============TRACEROUTE===================>" && \
                      sudo traceroute ${ADDCHECKPING}
                      "
+exit 1
+}
+ssh_list() {
+cat ~/.ssh/config| grep Host
+exit 1
 }
 while [ -n "$1" ]
        do
@@ -94,6 +99,7 @@ while [ -n "$1" ]
              --add )route_add;;
              --dell )route_dell;;
              --check )route_check;;
+             --list )ssh_list;;
             esac
         shift
             done
