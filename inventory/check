@@ -3,11 +3,6 @@
 import paramiko
 import yaml
 from yaml import UnsafeLoader, FullLoader, Loader
-commands = [
-  'hostname',
-  'df -h',
-  'du -sh /home/'
-  ]
 class Raspberry(object):
     def __init__(self):
         self.ssh_client = paramiko.SSHClient()
