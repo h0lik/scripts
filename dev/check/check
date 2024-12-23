@@ -1,0 +1,38 @@
+#!/usr/bin/env python3
+
+import paramiko
+import yaml
+from yaml import UnsafeLoader, FullLoader, Loader
+commands = [
+  'hostname',
+  'df -h',
+  'du -sh /home/'
+  ]
+class Raspberry(object):
+    def __init__(self):
+        self.ssh_client = paramiko.SSHClient()
+        self.ssh_client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+    @staticmethod
+    def server_info():
+        with open('./host.yaml') as fh:
+             data = fh.read()
+             return yaml.load(data, Loader=Loader)
+    def execute_cmd(self):
+        for host_info in self.server_info():
+            self.ssh_client.connect(
+                hostname=host_info.get('hostname'),
+                port=host_info.get('port'),
+                username=host_info.get('username'),
+                password=host_info.get('password')
+            )
+            commands = ['hostname', 'df -h',  'du -ahx /home/ | sort -rh | head -10']
+            for  command in commands:
+                 print("="*25, command, "="*25)
+                 std_in, stdout, stderr = self.ssh_client.exec_command(command)
+                 print(stdout.read().decode('utf-8'))
+    def close_connect(self):
+        self.execute_cmd()
+        self.ssh_client.close()
+if __name__ == '__main__':
+    r = Raspberry()
+    r.close_connect()
