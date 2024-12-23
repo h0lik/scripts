@@ -1,0 +1,99 @@
+#!/bin/bash 
+set -e 
+
+rt_help() {
+clear
+cat << EOF
+### ##    ## ##   ##  ###  #### ##  ### ###  
+ ##  ##  ##   ##  ##   ##  # ## ##   ##  ##  
+ ##  ##  ##   ##  ##   ##    ##      ##      
+ ## ##   ##   ##  ##   ##    ##      ## ##   
+ ## ##   ##   ##  ##   ##    ##      ##      
+ ##  ##  ##   ##  ##   ##    ##      ##  ##  
+#### ##   ## ##    ## ##    ####    ### ###  
+==========================================================
+What will it look like:
+#===============Comment name alias===============
+Command  --search 
+The search command searches for a route by IP address
+Command --add
+ - Name alias: This is Alice's ssh name
+ - IP-address: IP address
+Adds a route to the hotline without registration to the file
+ - Name alias: This is Alice's ssh name
+ - IP-address: IP address
+ - MASK: Network mask
+ - Gateway: GATEWAY 
+ - Chek-ip: It will ping from your route's network (It must be a device)
+Command --dell
+Deletes the route to the hotspot without touching the network configuration files
+ - Name alias: This is Alice's ssh name
+ - IP-address: IP address
+ - MASK: Network mask
+ - Gateway: GATEWAY
+Command --check 
+Checks the route for availability in the system.
+ - It also executes the ping command.
+ - and the traceroute command
+      - Name alias: This is Alice's ssh name
+      - IP-address: IP address
+      - Chek-ip: It will ping from your route's network (It must be a device)
+
+==========================================================
+EOF
+}
+
+route_search() {
+      read -p "Name server ssh alias:" NAME
+      read -p "IP-Address:" ADDR
+ssh -t ${NAME} "sudo route -n | grep $ADDR"
+exit 1
+}
+route_add() {
+      read -p "Name server ssh alias:" NAMEADD
+      read -p "IP-address:" ADDR
+      read -p "MASK:" MASK
+      read -p "Gateway:" GATEWAY
+      read -p "Check IP:" CHECKIP
+echo -e "\e[32m |-> Add route \e[0m"
+ssh -t ${NAMEADD} "sudo route add -net ${ADDR}/${MASK} gw ${GATEWAY} && \
+                   echo "<===============CHECK======================>" && \
+                   sudo route -n | grep ${ADDR} && \
+                   echo "<==============PING->${CHECKIP}============================>" && \
+                   sudo ping ${CHECKIP} -c 4"
+exit 1
+}
+route_dell() {
+      read -p "Name server ssh alias:" NAMEDELL
+      read -p "IP-Address:" IPDELL
+      read -p "MASK:"  MASKDELL
+      read -p "Gateway:" GATEWAYDELL
+echo -e "\e[31m |-> Dell route \e[0m"
+ssh -t ${NAMEDELL} "sudo route del -net ${IPDELL}/${MASKDELL} gw ${GATEWAYDELL} && \
+                    echo "<=================CHECK=====================>" && \
+                    sudo route -n | grep ${IPDELL}"
+exit 1
+}
+route_check() {
+      read -p "Name sever ssh alias:" NAMECHECK
+      read -p "IP-address:" ADDCHECK
+      read -p "Ping-Address:" ADDCHECKPING
+echo -e "\e[32m Check ${ADDCHECK} route \e[0m"
+ssh -t ${NAMECHECK} "sudo route -n | grep ${ADDCHECK} && \
+                     echo "<=================PING==================>" && \
+                     sudo ping ${ADDCHECKPING} -c 4 && \ 
+                     echo "<==============TRACEROUTE===================>" && \
+                     sudo traceroute ${ADDCHECKPING}
+                     "
+}
+while [ -n "$1" ]
+       do
+       case "$1" in
+             --help )rt_help;;
+             --search )route_search;;
+             --add )route_add;;
+             --dell )route_dell;;
+             --check )route_check;;
+            esac
+        shift
+            done
