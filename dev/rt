@@ -38,7 +38,13 @@ Checks the route for availability in the system.
       - Name alias: This is Alice's ssh name
       - IP-address: IP address
       - Chek-ip: It will ping from your route's network (It must be a device)
-
+Command --scanip
+Scan the web to find free IP addresses 
+ - It also executes the scanip command.
+ - and the traceroute command
+      - Name alias: This is Alice's ssh name
+      - IP-address: IP address
+      - MASK: Network mask
 ==========================================================
 EOF
 }
@@ -91,6 +97,16 @@ ssh_list() {
 cat ~/.ssh/config| grep Host
 exit 1
 }
+scan-ip() {
+read -p "Name server ssh-alias:" NAMESSH
+read -p "IP-Address:" ADDR
+read -p "Network-mask:" MASK
+echo -e "\e[32m Scan IP - \e[31m${ADDR}\e[0m - \e[32moutput of free IP addresses \e[0m"
+echo -e "\e[33m <-------------Start-------------->\e[0m"
+ssh -t ${NAMESSH} "sudo nmap -v -sn -n ${ADDR}/${MASK} -oG - | awk '/Status: Down/{print $2}'"
+echo -e "\e[33m <--------------end--------------->\e[0m"
+}
+
 while [ -n "$1" ]
        do
        case "$1" in
@@ -99,6 +115,7 @@ while [ -n "$1" ]
              --add )route_add;;
              --dell )route_dell;;
              --check )route_check;;
+             --scanip )scan-ip;;
              --list )ssh_list;;
             esac
         shift
